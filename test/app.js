@@ -15,7 +15,8 @@ describe('generator-potree:app', function () {
     assert.file([
       'dummyfile.txt',
       'bower.json',
-      'gulpfile.babel.js'
+      'gulpfile.babel.js',
+      'app/index.html'
     ]);
   });
 });

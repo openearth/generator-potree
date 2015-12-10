@@ -33,6 +33,36 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   writing: {
+    html: function () {
+      var bsPath;
+
+      // path prefix for Bootstrap JS files
+      bsPath = '/bower_components/';
+      bsPath += 'bootstrap/js/';
+
+      this.fs.copyTpl(
+        this.templatePath('index.html'),
+        this.destinationPath('app/index.html'),
+        {
+          appname: this.appname,
+          bsPath: bsPath,
+          bsPlugins: [
+            'affix',
+            'alert',
+            'dropdown',
+            'tooltip',
+            'modal',
+            'transition',
+            'button',
+            'popover',
+            'carousel',
+            'scrollspy',
+            'collapse',
+            'tab'
+          ]
+        }
+      );
+    },
     gulpfile: function () {
       this.fs.copyTpl(
         this.templatePath('gulpfile.babel.js'),
