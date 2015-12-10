@@ -2,8 +2,13 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var _s = require('underscore.string');
 
 module.exports = yeoman.generators.Base.extend({
+  initializing: function () {
+    this.pkg = require('../../package.json');
+  },
+
   prompting: function () {
     var done = this.async();
 
@@ -27,11 +32,48 @@ module.exports = yeoman.generators.Base.extend({
     }.bind(this));
   },
 
-  writing: function () {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
+  writing: {
+    gulpfile: function () {
+      this.fs.copyTpl(
+        this.templatePath('gulpfile.babel.js'),
+        this.destinationPath('gulpfile.babel.js'),
+        {
+          date: (new Date()).toISOString().split('T')[0],
+          name: this.pkg.name,
+          version: this.pkg.version
+        }
+      );
+    },
+    packageJSON: function () {
+      this.fs.copyTpl(
+        this.templatePath('_package.json'),
+        this.destinationPath('package.json'),
+        {
+          includeSass: this.includeSass
+        }
+      );
+    },
+    bower: function () {
+      var bowerJson = {
+        name: _s.slugify(this.appname),
+        private: true,
+        dependencies: {
+          d3: '~3.5.10'
+        }
+      };
+
+      this.fs.writeJSON('bower.json', bowerJson);
+      this.fs.copy(
+        this.templatePath('bowerrc'),
+        this.destinationPath('.bowerrc')
+      );
+    },
+    dummyfile: function () {
+      this.fs.copy(
+        this.templatePath('dummyfile.txt'),
+        this.destinationPath('dummyfile.txt')
+      );
+    }
   },
 
   install: function () {
