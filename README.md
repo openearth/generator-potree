@@ -58,6 +58,16 @@ GPLv3 © [Fedor Baart](http://oss.deltares.nl) on parts that are new.
 ![screenshot](docs/screenshot.png)
 ![Morro Bay](docs/morrobay.png)
 
+## Todo
+If you want to contribute, there's several things that you can do.
+* Add water
+* Add water from model results
+* Add water from tide gauges
+* Add option to select aerial map, based on [public sources](http://potree.org/demo/experimental/potree_map_projections/examples/viewer_proj.html).
+* Cleanup webpage (template/index.html)
+* Make openlayers map optional (react on events)
+
+
 [npm-image]: https://badge.fury.io/js/generator-potree.svg
 [npm-url]: https://npmjs.org/package/generator-potree
 [travis-image]: https://travis-ci.org/SiggyF/generator-potree.svg?branch=master

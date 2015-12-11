@@ -339,7 +339,12 @@ module.exports = generators.Base.extend({
         }
       );
     },
-
+    water: function(){
+      this.fs.copy(
+        this.templatePath('watershader'),
+        this.destinationPath('app/resources/watershader')
+      );
+    },
     misc: function () {
       mkdirp('app/images');
       mkdirp('app/fonts');
