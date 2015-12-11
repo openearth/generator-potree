@@ -142,15 +142,15 @@ module.exports = generators.Base.extend({
         private: true,
         dependencies: {
           // threejs is a bit big, this is a minified version
-          'three.js': '>=0.72.0',
+          // version 0.73 moved ImageUtils generate something to Examples.
+          'three.js': '<0.73.0',
           // these 2 don't have proper version numbers
           'stats.js': '*',
           'dat-gui': '*',
-          TweenJS: '>=0.6.2',
           d3: '>=3.5.10',
+          proj4: '>=2.3.12',
           // not on bower
-          potree: 'https://github.com/potree/potree.git#develop',
-          proj4: '>=2.3.12'
+          potree: 'https://github.com/potree/potree.git#develop'
         }
       };
 
@@ -192,10 +192,43 @@ module.exports = generators.Base.extend({
         potree: {
           main: [
             'src/viewer/potree.css',
+            'libs/other/BinaryHeap.js',
             'build/js/potree.js',
+            // bit buggy here, some undeclared variables.
+            // overwrite potree.js has an old version
+            'src/viewer/viewer.js',
+            'src/viewer/profile.js',
+            'src/viewer/ProgressBar.js',
+            'src/PointCloudOctree.js',
+            'src/PointCloudOctreeGeometry.js',
+            'src/loader/POCLoader.js',
+            'src/loader/BinaryLoader.js',
+            'src/loader/LasLazLoader.js',
+            'src/materials/PointCloudMaterial.js',
+            'src/materials/EyeDomeLightingMaterial.js',
+            'src/EarthControls.js',
+            'src/OrbitControls.js',
+            'src/FirstPersonControls.js',
+            'src/GeoControls.js',
+            'src/utils/ProfileTool.js',
+            'src/utils/MeasuringTool.js',
+            'src/utils/TransformationTool.js',
+            'src/utils/VolumeTool.js',
+            'src/utils.js',
+            'src/LRU.js',
+            'src/Annotation.js',
+            'src/TextSprite.js',
+            'src/Features.js',
+            'src/extensions/PerspectiveCamera.js',
+            'src/arena4d/PointCloudArena4D.js',
+            'src/arena4d/PointCloudArena4DGeometry.js',
             'libs/plasio/js/laslaz.js',
             'libs/plasio/vendor/bluebird.js',
-            'build/potree/laslaz.js'
+            'libs/tween/tween.min.js',
+            'build/potree/laslaz.js',
+            // linked in html files
+            'src/viewer/profile.html'
+
           ]
         }
       });

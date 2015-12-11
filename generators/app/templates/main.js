@@ -1,11 +1,12 @@
-(function(){
+/*global Potree */
+(function () {
   'use strict';
-  var onPointCloudLoaded = function(event){
+  var onPointCloudLoaded = function (event) {
     // do stuff here that should be executed whenever a point cloud has been loaded.
     // event.pointcloud returns the point cloud object
-    console.log("a point cloud has been loaded", event);
+    console.log('a point cloud has been loaded', event);
   };
-
+  var renderArea = document.getElementById("renderArea");
   var viewer = new Potree.Viewer(document.getElementById('potree_render_area'), {
     onPointCloudLoaded: onPointCloudLoaded
   });
