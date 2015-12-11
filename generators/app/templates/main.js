@@ -6,7 +6,6 @@
     // event.pointcloud returns the point cloud object
     console.log('a point cloud has been loaded', event);
   };
-  var renderArea = document.getElementById("renderArea");
   var viewer = new Potree.Viewer(document.getElementById('potree_render_area'), {
     onPointCloudLoaded: onPointCloudLoaded
   });
