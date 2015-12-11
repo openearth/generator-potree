@@ -3,15 +3,26 @@
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-potree using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+This generator makes use of a few other software packages. So you ...
+    have to install these first.
+
+* node.js [node.js](https://nodejs.org/)
+
+Then with node installed you should have the node package manager ...
+    available. This provides you with the `npm` command.
+
+With the npm command available you can install [Bower](http://bower.io), [Gulp](http://gulpjs.com), [Babel](http://babeljs.io), and [Yeoman](http://yeoman.io) and generator-potree using [npm](https://www.npmjs.com/). It's common practice to install everything as a user, not as root.
 
 ```bash
+npm install -g bower
+npm install -g gulp
+npm install -g babel-cli
 npm install -g yo
 npm install -g generator-potree
 ```
 
 The last command will work once we register this module at npm. For ...
-    now and when developing you can use the source code version. 
+    now and when developing you can use the source code version.
 
 ```bash
 cd generator-potree
@@ -24,13 +35,23 @@ Then generate your new project:
 yo potree
 ```
 
+This should show an interactive screen (in the command line) where you can answer a few technical questions. The result should be a website generated in your directory. You can start a local test server. If you want to deploy to another website you can build a static website.
+
+```bash
+# local server
+gulp serve
+# build a static website
+gulp build
+```
+
+
 ## Getting To Know Yeoman
 
 Yeoman has a heart of gold. He&#39;s a person with feelings and opinions, but he&#39;s very easy to work with. If you think he&#39;s too opinionated, he can be easily convinced. Feel free to [learn more about him](http://yeoman.io/).
 
 ## License
 
-MIT © [Fedor Baart](http://oss.deltares.nl)
+GPLv3 © [Fedor Baart](http://oss.deltares.nl)
 
 
 [npm-image]: https://badge.fury.io/js/generator-potree.svg
