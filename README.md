@@ -51,7 +51,9 @@ Yeoman has a heart of gold. He&#39;s a person with feelings and opinions, but he
 
 ## License
 
-GPLv3 © [Fedor Baart](http://oss.deltares.nl)
+Generator is based on an example in [potree](https://github.com/potree/potree) and on the [gulp-webapp](https://github.com/yeoman/generator-gulp-webapp) generator.
+GPLv3 © [Fedor Baart](http://oss.deltares.nl) on parts that are new.
+
 
 
 [npm-image]: https://badge.fury.io/js/generator-potree.svg
