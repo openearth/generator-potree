@@ -10,6 +10,14 @@ npm install -g yo
 npm install -g generator-potree
 ```
 
+The last command will work once we register this module at npm. For ...
+    now and when developing you can use the source code version. 
+
+```bash
+cd generator-potree
+npm link
+```
+
 Then generate your new project:
 
 ```bash
