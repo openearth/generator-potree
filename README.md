@@ -56,6 +56,7 @@ GPLv3 © [Fedor Baart](http://oss.deltares.nl) on parts that are new.
 
 ## Screenshot
 ![screenshot](docs/screenshot.png)
+![Morro Bay](docs/morrobay.png)
 
 [npm-image]: https://badge.fury.io/js/generator-potree.svg
 [npm-url]: https://npmjs.org/package/generator-potree
