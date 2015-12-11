@@ -147,8 +147,11 @@ module.exports = generators.Base.extend({
           // these 2 don't have proper version numbers
           'stats.js': '*',
           'dat-gui': '*',
+          'jquery-ui': '*',
           d3: '>=3.5.10',
           proj4: '>=2.3.12',
+          //  Tim from OpenLayers doesn't like bower packages (https://github.com/openlayers/ol3/issues/3119#issuecomment-156653092), so we'll use this one
+          'ol3-bower': '*',
           // not on bower
           potree: 'https://github.com/potree/potree.git#develop'
         }
@@ -197,6 +200,7 @@ module.exports = generators.Base.extend({
             // bit buggy here, some undeclared variables.
             // overwrite potree.js has an old version
             'src/viewer/viewer.js',
+            'src/viewer/map.js',
             'src/viewer/profile.js',
             'src/viewer/ProgressBar.js',
             'src/PointCloudOctree.js',

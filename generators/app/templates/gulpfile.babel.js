@@ -102,9 +102,19 @@ gulp.task('messy', () => {
   }).pipe(gulp.dest('app/src'));
 });
 
+gulp.task('skybox', () => {
+  return gulp.src([
+    'bower_components/potree/resources/textures/skybox/**/*.{jpg,png}'
+  ], {
+    dot: true
+  }).pipe(
+    gulp.dest('app/resources/textures/skybox')
+  );
+});
+
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'fonts', 'messy'], () => {
+  gulp.task('serve', ['styles', 'fonts', 'messy', 'skybox'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -172,7 +182,7 @@ gulp.task('wiredep', () => {<% if (includeSass) { %>
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras', 'messy'], () => {
+gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras', 'messy', 'skybox'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 

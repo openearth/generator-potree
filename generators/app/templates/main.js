@@ -1,4 +1,6 @@
 /*global Potree */
+// make this global
+var viewer;
 (function () {
   'use strict';
   var onPointCloudLoaded = function (event) {
@@ -6,7 +8,7 @@
     // event.pointcloud returns the point cloud object
     console.log('a point cloud has been loaded', event);
   };
-  var viewer = new Potree.Viewer(document.getElementById('potree_render_area'), {
+  viewer = new Potree.Viewer(document.getElementById('potree_render_area'), {
     onPointCloudLoaded: onPointCloudLoaded
   });
 
