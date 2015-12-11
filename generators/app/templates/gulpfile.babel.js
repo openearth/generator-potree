@@ -112,9 +112,19 @@ gulp.task('skybox', () => {
   );
 });
 
+gulp.task('icons', () => {
+  return gulp.src([
+    'bower_components/potree/resources/icons/**/*.{jpg,png,svg}'
+  ], {
+    dot: true
+  }).pipe(
+    gulp.dest('app/resources/icons')
+  );
+});
+
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-  gulp.task('serve', ['styles', 'fonts', 'messy', 'skybox'], () => {
+gulp.task('serve', ['styles', 'fonts', 'messy', 'skybox', 'icons'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -182,7 +192,7 @@ gulp.task('wiredep', () => {<% if (includeSass) { %>
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras', 'messy', 'skybox'], () => {
+gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras', 'messy', 'skybox', 'icons'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 

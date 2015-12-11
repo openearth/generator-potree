@@ -1,5 +1,5 @@
 <!doctype html>
-<html<% if (includeModernizr) { %> class="no-js"<% } %> lang="">
+<html class="no-js" lang="">
   <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -17,16 +17,15 @@
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-    <% if (includeModernizr) { %>
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild --><% } %>
+    <!-- endbuild -->
 
   </head>
   <body>
     <!--[if lt IE 10]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
     <% if (includeBootstrap) { %>
     <div class="fluid-container">
       <div class="header"></div>
@@ -34,6 +33,21 @@
       <div class="row">
         <div class="col-lg-12">
           <div id="potree_render_area"></div>
+          <div>
+            <img class="potree_menu_toggle" src="../resources/icons/menu_button.svg" onclick="viewer.toggleSidebar()" />
+            <img id="potree_map_toggle" src="../resources/icons/map_icon.png" onclick="viewer.toggleMap()" style="display: none"/>
+          </div>
+
+          <div id="potree_map" class="mapBox" style="position: absolute; left: 50px; top: 50px; width: 400px; height: 400px; display: none">
+            <div id="potree_map_header" style="position: absolute; width: 100%; height: 25px; top: 0px; background-color: rgba(0,0,0,0.5); z-index: 1000; border-top-left-radius: 3px; border-top-right-radius: 3px;">
+            </div>
+            <div id="potree_map_content" class="map" style="position: absolute; z-index: 100; top: 25px; width: 100%; height: calc(100% - 25px); border: 2px solid rgba(0,0,0,0.5); box-sizing: border-box;"></div>
+          </div>
+
+          <!-- HEADING -->
+          <div id="potree_description" class="potree_info_text"></div>
+
+          <div id="potree_sidebar_container"> </div>
         </div>
       </div>
 
@@ -51,9 +65,9 @@
     <!-- endbuild -->
     <% if (includeBootstrap) { %>
     <!-- build:js scripts/plugins.js -->
-<% bsPlugins.forEach(function (plugin) { -%>
+    <% bsPlugins.forEach(function (plugin) { -%>
     <script src="<%= bsPath + plugin %>.js"></script>
-<% }) -%>
+    <% }) -%>
     <!-- endbuild -->
     <% } %>
     <!-- build:js scripts/main.js -->

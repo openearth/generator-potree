@@ -52,7 +52,7 @@ module.exports = generators.Base.extend({
     var done = this.async();
 
     if (!this.options['skip-welcome-message']) {
-      this.log(yosay('\'Allo \'allo! Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile to build your app.'));
+      this.log(yosay("Hi. Let's create a pointcloud viewer."));
     }
 
     var prompts = [{
@@ -67,19 +67,7 @@ module.exports = generators.Base.extend({
         name: 'Bootstrap',
         value: 'includeBootstrap',
         checked: true
-      }, {
-        name: 'Modernizr',
-        value: 'includeModernizr',
-        checked: true
       }]
-    }, {
-      type: 'confirm',
-      name: 'includeJQuery',
-      message: 'Would you like to include jQuery?',
-      default: true,
-      when: function (answers) {
-        return answers.features.indexOf('includeBootstrap') === -1;
-      }
     }];
 
     this.prompt(prompts, function (answers) {
@@ -93,8 +81,6 @@ module.exports = generators.Base.extend({
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
-      this.includeModernizr = hasFeature('includeModernizr');
-      this.includeJQuery = answers.includeJQuery;
 
       done();
     }.bind(this));
@@ -147,13 +133,15 @@ module.exports = generators.Base.extend({
           // these 2 don't have proper version numbers
           'stats.js': '*',
           'dat-gui': '*',
+          jquery: '*',
           'jquery-ui': '*',
           d3: '>=3.5.10',
           proj4: '>=2.3.12',
           //  Tim from OpenLayers doesn't like bower packages (https://github.com/openlayers/ol3/issues/3119#issuecomment-156653092), so we'll use this one
           'ol3-bower': '*',
           // not on bower
-          potree: 'https://github.com/potree/potree.git#develop'
+          potree: 'https://github.com/potree/potree.git#develop',
+          modernizr: '~2.8.1'
         }
       };
 
@@ -182,8 +170,6 @@ module.exports = generators.Base.extend({
             }
           };
         }
-      } else if (this.includeJQuery) {
-        bowerJson.dependencies.jquery = '~2.1.1';
       }
 
       _.merge(bowerJson.overrides, {
@@ -237,9 +223,6 @@ module.exports = generators.Base.extend({
         }
       });
 
-      if (this.includeModernizr) {
-        bowerJson.dependencies.modernizr = '~2.8.1';
-      }
 
       this.fs.writeJSON('bower.json', bowerJson);
       this.fs.copy(
@@ -317,8 +300,6 @@ module.exports = generators.Base.extend({
           appname: this.appname,
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
-          includeModernizr: this.includeModernizr,
-          includeJQuery: this.includeJQuery,
           bsPath: bsPath,
           bsPlugins: [
             'affix',
