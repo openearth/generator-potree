@@ -1,0 +1,54 @@
+#potree_menu_toggle {
+  position: absolute;
+  float: left;
+  margin: 8px 8px;
+  background: none;
+  width: 2.5em;
+  height: 2.5em;
+  cursor: pointer;
+  z-index: 100;
+}
+#potree_map_toggle{
+  position: absolute;
+  float: left;
+  margin: 8px 8px;
+  background: none;
+  width: 2.5em;
+  height: 2.5em;
+  top: calc(2.5em + 16px);
+  cursor: pointer;
+  z-index: 100;
+}
+
+#potree_map {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  width: 400px;
+  height: 400px;
+  display: none;
+}
+
+#potree_map_header {
+  position: absolute;
+  width: 100%;
+  height: 25px;
+  top: 0px;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1000;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+#potree_map_content {
+  position: absolute;
+  z-index: 100;
+  top: 25px;
+  width: 100%;
+  height: calc(100% - 25px);
+  border: 2px solid rgba(0,0,0,0.5);
+  box-sizing: border-box;
+}
+
+#potree_buttons {
+  top: 0px;
+}

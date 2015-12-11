@@ -68,22 +68,34 @@ module.exports = generators.Base.extend({
         value: 'includeBootstrap',
         checked: true
       }]
+    },{
+      type: 'input',
+      name: 'pointcloud',
+      message: 'where is our pointcloud (cloud.js file)',
+      default: 'http://5.9.65.151/mschuetz/potree/resources/pointclouds/opentopography/CA13_1.4/cloud.js',
+      store: true
     }];
 
     this.prompt(prompts, function (answers) {
-      var features = answers.features;
-
       function hasFeature(feat) {
         return features && features.indexOf(feat) !== -1;
       }
+      if (_.has(answers, 'features')) {
+        var features = answers.features;
 
-      // manually deal with the response, get back and store the results.
-      // we change a bit this way of doing to automatically do this in the self.prompt() method.
-      this.includeSass = hasFeature('includeSass');
-      this.includeBootstrap = hasFeature('includeBootstrap');
+
+        // manually deal with the response, get back and store the results.
+        // we change a bit this way of doing to automatically do this in the self.prompt() method.
+        this.includeSass = hasFeature('includeSass');
+        this.includeBootstrap = hasFeature('includeBootstrap');
+      }
+      if (_.has(answers, 'pointcloud')) {
+        this.pointcloud = answers.pointcloud;
+      }
 
       done();
     }.bind(this));
+
   },
 
   writing: {
@@ -176,6 +188,12 @@ module.exports = generators.Base.extend({
         'dat-gui': {
           main: [
             'build/dat.gui.js'
+          ]
+        },
+        'jquery-ui': {
+          main: [
+            'jquery-ui.js',
+            'themes/smoothness/jquery-ui.min.css'
           ]
         },
         potree: {
@@ -273,9 +291,12 @@ module.exports = generators.Base.extend({
     },
 
     scripts: function () {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('main.js'),
-        this.destinationPath('app/scripts/main.js')
+        this.destinationPath('app/scripts/main.js'),
+        {
+          pointcloud: this.pointcloud
+        }
       );
     },
 

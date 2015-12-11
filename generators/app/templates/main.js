@@ -20,8 +20,11 @@ var viewer;
   viewer.setQuality('Squares');
   viewer.setPointBudget(1 * 1000 * 1000);
   viewer.setDescription('');
-  viewer.addPointCloud('http://5.9.65.151/mschuetz/potree/resources/pointclouds/opentopography/CA13_1.4/cloud.js');
+  viewer.addPointCloud('<%= pointcloud %>');
   viewer.loadGUI();
+
+  $('#potree_menu_toggle').click(viewer.toggleSidebar);
+  $('#potree_map_toggle').click(viewer.toggleMap);
 
 
 })();
