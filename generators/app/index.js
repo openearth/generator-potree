@@ -335,6 +335,14 @@ module.exports = generators.Base.extend({
           includeWater: this.includeWater
         }
       );
+      this.fs.copyTpl(
+        this.templatePath('potreeRenderer.js'),
+        this.destinationPath('app/scripts/potreeRenderer.js'),
+        {
+          pointcloud: this.pointcloud,
+          includeWater: this.includeWater
+        }
+      );
     },
 
     html: function () {

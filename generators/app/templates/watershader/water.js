@@ -10,18 +10,15 @@ Potree.Viewer.prototype.addWater = function () {
     filterparam: 1
   };
 
-  this.scenes.push({
-    scene: new THREE.Scene(),
-    camera: new THREE.PerspectiveCamera()
-  });
+  this.sceneWater = new THREE.Scene();
 
   var light = new THREE.DirectionalLight(0xffffbb, 1);
   light.position.set(-1, 1, -1);
-  this.scenes[2].scene.add(light);
+  this.sceneWater.add(light);
   var waterNormals = new THREE.ImageUtils.loadTexture('resources/watershader/waternormals.jpg');
   waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
 
-  var water = new THREE.Water(this.renderer, this.scenes[2].camera, this.scenes[2].scene, {
+  var water = new THREE.Water(this.renderer, this.camera, this.sceneWater, {
     textureWidth: 1024,
     textureHeight: 1024,
     waterNormals: waterNormals,
@@ -40,5 +37,5 @@ Potree.Viewer.prototype.addWater = function () {
   var boundingBox = this.getBoundingBox();
   mirrorMesh.scale.x = boundingBox.max.x;
   mirrorMesh.scale.y = boundingBox.max.y;
-  this.scenes[2].scene.add(mirrorMesh);
+  this.sceneWater.add(mirrorMesh);
 };
