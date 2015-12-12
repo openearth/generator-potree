@@ -22,7 +22,9 @@ var viewer;
   viewer.setDescription('');
   viewer.addPointCloud('<%= pointcloud %>');
   viewer.loadGUI();
-
+    <% if (includeWater) { %>
+  viewer.addWater();
+    <% } %>
   $('#potree_menu_toggle').click(viewer.toggleSidebar);
   $('#potree_map_toggle').click(viewer.toggleMap);
 

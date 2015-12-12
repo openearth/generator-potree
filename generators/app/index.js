@@ -67,6 +67,10 @@ module.exports = generators.Base.extend({
         name: 'Bootstrap',
         value: 'includeBootstrap',
         checked: true
+      }, {
+        name: 'Water',
+        value: 'includeWater',
+        checked: true
       }]
     },{
       type: 'input',
@@ -88,6 +92,7 @@ module.exports = generators.Base.extend({
         // we change a bit this way of doing to automatically do this in the self.prompt() method.
         this.includeSass = hasFeature('includeSass');
         this.includeBootstrap = hasFeature('includeBootstrap');
+        this.includeWater = hasFeature('includeWater');
       }
       if (_.has(answers, 'pointcloud')) {
         this.pointcloud = answers.pointcloud;
@@ -203,6 +208,8 @@ module.exports = generators.Base.extend({
             'build/js/potree.js',
             // bit buggy here, some undeclared variables.
             // overwrite potree.js has an old version
+            // Also replace viewer.js with a custom ones so we can render extra stuff
+
             'src/viewer/viewer.js',
             'src/viewer/map.js',
             'src/viewer/profile.js',
@@ -295,7 +302,32 @@ module.exports = generators.Base.extend({
         this.templatePath('main.js'),
         this.destinationPath('app/scripts/main.js'),
         {
-          pointcloud: this.pointcloud
+          pointcloud: this.pointcloud,
+          includeWater: this.includeWater
+        }
+      );
+      this.fs.copyTpl(
+        this.templatePath('viewer.js'),
+        this.destinationPath('app/scripts/viewer.js'),
+        {
+          pointcloud: this.pointcloud,
+          includeWater: this.includeWater
+        }
+      );
+      this.fs.copyTpl(
+        this.templatePath('map.js'),
+        this.destinationPath('app/scripts/map.js'),
+        {
+          pointcloud: this.pointcloud,
+          includeWater: this.includeWater
+        }
+      );
+      this.fs.copyTpl(
+        this.templatePath('profile.js'),
+        this.destinationPath('app/scripts/profile.js'),
+        {
+          pointcloud: this.pointcloud,
+          includeWater: this.includeWater
         }
       );
     },
@@ -321,6 +353,7 @@ module.exports = generators.Base.extend({
           appname: this.appname,
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
+          includeWater: this.includeWater,
           bsPath: bsPath,
           bsPlugins: [
             'affix',
