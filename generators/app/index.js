@@ -343,6 +343,22 @@ module.exports = generators.Base.extend({
           includeWater: this.includeWater
         }
       );
+      this.fs.copyTpl(
+        this.templatePath('edlRenderer.js'),
+        this.destinationPath('app/scripts/edlRenderer.js'),
+        {
+          pointcloud: this.pointcloud,
+          includeWater: this.includeWater
+        }
+      );
+      this.fs.copyTpl(
+        this.templatePath('highqualityRenderer.js'),
+        this.destinationPath('app/scripts/highqualityRenderer.js'),
+        {
+          pointcloud: this.pointcloud,
+          includeWater: this.includeWater
+        }
+      );
     },
 
     html: function () {

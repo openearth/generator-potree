@@ -1,6 +1,6 @@
-var PotreeRenderer = function(){
-
-  this.render = function(){
+var PotreeRenderer = function(scope){
+  this.name = 'potree';
+  this.render = function(scope){
     {// resize
       var width = scope.renderArea.clientWidth;
       var height = scope.renderArea.clientHeight;
