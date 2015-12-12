@@ -201,6 +201,11 @@ module.exports = generators.Base.extend({
             'themes/smoothness/jquery-ui.min.css'
           ]
         },
+        'three.js': {
+          main: [
+            'three.js'
+          ]
+        },
         potree: {
           main: [
             'src/viewer/potree.css',
