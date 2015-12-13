@@ -3,6 +3,8 @@
 var viewer;
 (function () {
   'use strict';
+
+  // fix for missing attributes
   var onPointCloudLoaded = function (event) {
     // do stuff here that should be executed whenever a point cloud has been loaded.
     // event.pointcloud returns the point cloud object

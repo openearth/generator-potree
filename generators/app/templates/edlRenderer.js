@@ -3,8 +3,6 @@ var EDLRenderer = function(scope){
   var edlMaterial = null;
   var attributeMaterials = [];
 
-  //var depthTexture = null;
-
   var rtColor = null;
   var gl = scope.renderer.context;
 
@@ -13,8 +11,6 @@ var EDLRenderer = function(scope){
       return;
     }
 
-    //var depthTextureExt = gl.getExtension("WEBGL_depth_texture");
-
     edlMaterial = new Potree.EyeDomeLightingMaterial();
 
 
@@ -22,10 +18,7 @@ var EDLRenderer = function(scope){
       minFilter: THREE.LinearFilter,
       magFilter: THREE.NearestFilter,
       format: THREE.RGBAFormat,
-      type: THREE.FloatType,
-      //type: THREE.UnsignedByteType,
-      //depthBuffer: false,
-      //stencilBuffer: false
+      type: THREE.FloatType
     } );
 
   };
@@ -48,7 +41,7 @@ var EDLRenderer = function(scope){
 
     scope.renderer.setSize(width, height);
     rtColor.setSize(width, height);
-  }
+  };
 
   this.render = function(scope){
 
@@ -63,7 +56,7 @@ var EDLRenderer = function(scope){
     }else{
       scope.renderer.render(scope.sceneBG, scope.cameraBG);
     }
-    scope.renderer.render(scope.scene, scope.camera);
+    // scope.renderer.render(scope.scene, scope.camera);
 
     var originalMaterials = [];
     for(var i = 0; i < scope.pointclouds.length; i++){
@@ -73,7 +66,6 @@ var EDLRenderer = function(scope){
 
       if(attributeMaterials.length <= i ){
         var attributeMaterial = new Potree.PointCloudMaterial();
-
         attributeMaterial.pointShape = Potree.PointShape.CIRCLE;
         attributeMaterial.interpolate = false;
         attributeMaterial.weighted = false;
@@ -170,7 +162,7 @@ var EDLRenderer = function(scope){
         Potree.utils.screenPass.render(scope.renderer, edlMaterial);
       }
 
-      scope.renderer.render(scope.scene, scope.camera);
+      // scope.renderer.render(scope.scene, scope.camera);
 
       scope.profileTool.render();
       scope.volumeTool.render();
@@ -180,5 +172,5 @@ var EDLRenderer = function(scope){
     }
 
 
-  }
+  };
 };

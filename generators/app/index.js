@@ -146,7 +146,9 @@ module.exports = generators.Base.extend({
         dependencies: {
           // threejs is a bit big, this is a minified version
           // version 0.73 moved ImageUtils generate something to Examples.
-          'three.js': '<0.73.0',
+          // 0.72 removed texture attributes in favor of geometry attributes.
+          // the texture attributes are used a lot
+          'three.js': '<0.72.0',
           // these 2 don't have proper version numbers
           'stats.js': '*',
           'dat-gui': '*',

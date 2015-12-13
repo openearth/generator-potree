@@ -11,7 +11,7 @@ var HighQualityRenderer = function(scope){
   var rtNormalize;
 
   var initHQSPlats = function(){
-    if(depthMaterial != null){
+    if(depthMaterial !== null){
       return;
     }
 
@@ -53,7 +53,7 @@ var HighQualityRenderer = function(scope){
       vertexShader: Potree.Shaders["normalize.vs"],
       fragmentShader: Potree.Shaders["normalize.fs"]
     });
-  }
+  };
 
   var resize = function(width, height){
     if(rtDepth.width == width && rtDepth.height == height){
@@ -89,7 +89,7 @@ var HighQualityRenderer = function(scope){
     }else{
       scope.renderer.render(scope.sceneBG, scope.cameraBG);
     }
-    scope.renderer.render(scope.scene, scope.camera);
+    // scope.renderer.render(scope.scene, scope.camera);
 
     for(var i = 0; i < scope.pointclouds.length; i++){
       var pointcloud = scope.pointclouds[i];

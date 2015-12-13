@@ -47,7 +47,7 @@ Potree.Viewer = function(domElement, args){
   // instance used to render
   this.rendererInstance;
   this.camera;
-  this.scene;
+  // this.scene;
   this.scenePointCloud;
   this.sceneBG;
   this.cameraBG;
@@ -56,7 +56,7 @@ Potree.Viewer = function(domElement, args){
   this.volumeTool;
   this.transformationTool;
 
-  var skybox;
+  this.skybox;
   var stats;
   var clock = new THREE.Clock();
   this.showSkybox = false;
@@ -661,14 +661,7 @@ Potree.Viewer = function(domElement, args){
     scope.updateHeightRange();
 
 
-    //scope.referenceFrame.updateMatrixWorld(true);
-    //scope.pointclouds[0].updateMatrixWorld();
-    //var sg = scope.pointclouds[0].boundingSphere.clone().applyMatrix4(scope.pointclouds[0].matrixWorld);
-    //scope.referenceFrame.position.copy(sg.center).multiplyScalar(-1);
-    //scope.referenceFrame.updateMatrixWorld(true);
-    //scope.referenceFrame.position.y -= scope.pointclouds[0].getWorldPosition().y;
-    //scope.referenceFrame.updateMatrixWorld(true);
-  }
+  };
 
   this.updateHeightRange = function(){
     var bbWorld = scope.getBoundingBox();
@@ -682,7 +675,7 @@ Potree.Viewer = function(domElement, args){
 
     scope.controls = scope.earthControls;
     scope.controls.enabled = true;
-  }
+  };
 
   this.useGeoControls = function(){
     if(scope.controls){
@@ -693,7 +686,7 @@ Potree.Viewer = function(domElement, args){
     scope.controls.enabled = true;
 
     //scope.controls.moveSpeed = scope.pointclouds[0].boundingSphere.radius / 6;
-  }
+  };
 
   this.useFPSControls = function(){
     if(scope.controls){
@@ -704,7 +697,7 @@ Potree.Viewer = function(domElement, args){
     scope.controls.enabled = true;
 
     //scope.controls.moveSpeed = scope.pointclouds[0].boundingSphere.radius / 6;
-  }
+  };
 
   this.useOrbitControls = function(){
     if(scope.controls){
@@ -745,16 +738,6 @@ Potree.Viewer = function(domElement, args){
     return scope.annotations;
   };
 
-
-
-
-
-
-
-
-
-
-
   //------------------------------------------------------------------------------------
   // Viewer Internals
   //------------------------------------------------------------------------------------
@@ -784,20 +767,12 @@ Potree.Viewer = function(domElement, args){
     sidebarContainer.css("width", "300px");
     sidebarContainer.css("height", "100%");
 
-
-    //$('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', '../src/viewer/viewer.css') );
-    //$('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', "../libs/bootstrap/css/bootstrap.min.css"));
-    //$('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', "../libs/jasny-bootstrap/css/jasny-bootstrap.css"));
-    //$('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', "../libs/jasny-bootstrap/css/navmenu-reveal.css" ));
-    //$('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', "../libs/jquery-ui-1.11.4/jquery-ui.css"  ));
-
-    //var elProfile = $('<div style="position: absolute; width: 100%; height: 30%; bottom: 0; display: none" >');
     var elProfile = $('<div>').load("../src/viewer/profile.html", function(){
       $('#potree_render_area').append(elProfile.children());
       scope._2dprofile = new Potree.Viewer.Profile(scope, document.getElementById("profile_draw_container"));
     });
 
-  }
+  };
 
   this.createControls = function(){
 
@@ -884,7 +859,7 @@ Potree.Viewer = function(domElement, args){
           }
         }
 
-        if(I != null){
+        if(I !== null){
 
           var targetRadius = 0;
           if(!scope.jumpDistance){
@@ -948,7 +923,7 @@ Potree.Viewer = function(domElement, args){
     var near = 0.1;
     var far = 1000*1000;
 
-    scope.scene = new THREE.Scene();
+    // scope.scene = new THREE.Scene();
     scope.scenePointCloud = new THREE.Scene();
     scope.sceneBG = new THREE.Scene();
 
@@ -968,7 +943,7 @@ Potree.Viewer = function(domElement, args){
     scope.renderer.domElement.addEventListener("mousedown", function(){scope.renderer.domElement.focus();});
     scope.rendererInstance = new PotreeRenderer(scope);
 
-    skybox = Potree.utils.loadSkybox("../resources/textures/skybox/");
+    this.skybox = Potree.utils.loadSkybox("../resources/textures/skybox/");
 
     // camera and controls
     scope.camera.position.set(-304, 372, 318);
@@ -985,7 +960,7 @@ Potree.Viewer = function(domElement, args){
     //this.addPointCloud(pointcloudPath);
 
     var grid = Potree.utils.createGrid(5, 5, 2);
-    scope.scene.add(grid);
+    // scope.scene.add(grid);
 
     scope.measuringTool = new Potree.MeasuringTool(scope.scenePointCloud, scope.camera, scope.renderer, scope.toGeo);
     scope.profileTool = new Potree.ProfileTool(scope.scenePointCloud, scope.camera, scope.renderer);
@@ -994,22 +969,13 @@ Potree.Viewer = function(domElement, args){
 
     scope.profileTool.addEventListener("profile_added", function(profileEvent){
 
-      //var poSelect = document.getElementById("profile_selection");
-      //var po = document.createElement("option");
-      //po.innerHTML = "profile " + scope.profileTool.profiles.length;
-      //poSelect.appendChild(po);
-
-
       var profileButton = document.createElement("button");
       profileButton.type = "button";
       profileButton.classList.add("btn");
       profileButton.classList.add("btn-primary");
       profileButton.id = "btn_rofile_" + scope.profileTool.profiles.length;
-      //profileButton.style.width = "100%";
       profileButton.value = "profile " + scope.profileTool.profiles.length;
       profileButton.innerHTML = "profile " + scope.profileTool.profiles.length;
-
-      //type="button" class="btn btn-primary"
 
       profileButton.onclick = function(clickEvent){
         scope.profileTool.draw(
@@ -1033,7 +999,6 @@ Potree.Viewer = function(domElement, args){
 
 
     // background
-    // var texture = THREE.ImageUtils.loadTexture( '../resources/textures/background.gif' );
     var texture = Potree.utils.createBackgroundTexture(512, 512);
 
     texture.minFilter = texture.magFilter = THREE.NearestFilter;
@@ -1060,7 +1025,7 @@ Potree.Viewer = function(domElement, args){
     var light = new THREE.AmbientLight( 0x555555 ); // soft white light
     scope.scenePointCloud.add( light );
 
-  }
+  };
 
   function onKeyDown(event){
     //console.log(event.keyCode);
@@ -1116,10 +1081,6 @@ Potree.Viewer = function(domElement, args){
         }
       }
 
-      //if(scope.heightMin === null){
-      //  scope.setHeightRange(bbWorld.min.y, bbWorld.max.y);
-      //}
-
       pointcloud.material.clipMode = scope.clipMode;
       pointcloud.material.heightMin = scope.heightMin;
       pointcloud.material.heightMax = scope.heightMax;
@@ -1128,10 +1089,6 @@ Potree.Viewer = function(domElement, args){
       pointcloud.showBoundingBox = scope.showBoundingBox;
       pointcloud.generateDEM = scope.useDEMCollisions;
       pointcloud.minimumNodePixelSize = scope.minNodeSize;
-
-      //if(!scope.freeze){
-      //  pointcloud.update(scope.camera, scope.renderer);
-      //}
 
       visibleNodes += pointcloud.numVisibleNodes;
       visiblePoints += pointcloud.numVisiblePoints;
@@ -1145,21 +1102,6 @@ Potree.Viewer = function(domElement, args){
       visiblePoints = result.numVisiblePoints;
     }
 
-
-    //if(stats && scope.showStats){
-    //  document.getElementById("lblNumVisibleNodes").style.display = "";
-    //  document.getElementById("lblNumVisiblePoints").style.display = "";
-    //  stats.domElement.style.display = "";
-    //
-    //  stats.update();
-    //
-    //  document.getElementById("lblNumVisibleNodes").innerHTML = "visible nodes: " + visibleNodes;
-    //  document.getElementById("lblNumVisiblePoints").innerHTML = "visible points: " + Potree.utils.addCommas(visiblePoints);
-    //}else if(stats){
-    //  document.getElementById("lblNumVisibleNodes").style.display = "none";
-    //  document.getElementById("lblNumVisiblePoints").style.display = "none";
-    //  stats.domElement.style.display = "none";
-    //}
 
     scope.camera.fov = scope.fov;
 
@@ -1271,47 +1213,6 @@ Potree.Viewer = function(domElement, args){
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //------------------------------------------------------------------------------------
-  // Renderers
-  //------------------------------------------------------------------------------------
-
-
-
-  function loop(timestamp) {
-    requestAnimationFrame(loop.bind(this));
-    this.update(clock.getDelta(), timestamp);
-
-    // update the renderer if needed
-    if(this.useEDL && Potree.Features.SHADER_EDL.isSupported()){
-      if(!this.rendererInstance.name !== 'edl'){
-        this.rendererInstance  = new EDLRenderer(this);
-      }
-    }else if(this.quality === "Splats"){
-      if(!this.rendererInstance.name !== 'highquality'){
-        this.rendererInstance = new HighQualityRenderer(this);
-      }
-    }
-    this.rendererInstance.render(scope);
-  }
-
   scope.initThree();
   // set defaults
   scope.setPointSize(1);
@@ -1325,6 +1226,29 @@ Potree.Viewer = function(domElement, args){
   scope.setShowBoundingBox(false);
   scope.setFreeze(false);
   scope.setNavigationMode("Orbit");
+
+
+  function loop(timestamp) {
+    requestAnimationFrame(loop.bind(this));
+    this.update(clock.getDelta(), timestamp);
+
+    //------------------------------------------------------------------------------------
+    // Renderers
+    //------------------------------------------------------------------------------------
+    // update the renderer if needed
+    if(this.useEDL && Potree.Features.SHADER_EDL.isSupported()){
+      if(!this.rendererInstance.name !== 'edl'){
+        this.rendererInstance  = new EDLRenderer(this);
+      }
+    }else if(this.quality === "Splats"){
+      if(!this.rendererInstance.name !== 'highquality'){
+        this.rendererInstance = new HighQualityRenderer(this);
+      }
+    } else {
+      this.rendererInstance = new PotreeRenderer(this);
+    }
+    this.rendererInstance.render(scope);
+  }
 
   // start rendering!
   requestAnimationFrame(loop.bind(this));

@@ -39,7 +39,7 @@ var PotreeRenderer = function(scope){
     }
 
     // render scene
-    scope.renderer.render(scope.scene, scope.camera);
+    // scope.renderer.render(scope.scene, scope.camera);
     scope.renderer.render(scope.scenePointCloud, scope.camera);
 
     scope.profileTool.render();
