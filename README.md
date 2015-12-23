@@ -26,6 +26,8 @@ The last command will work once we register this module at npm. For ...
 
 ```bash
 cd generator-potree
+# install dependencies
+npm install
 npm link
 ```
 
